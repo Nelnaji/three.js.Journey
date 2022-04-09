@@ -34,6 +34,8 @@ cube3.position.x = -2;
 cube2.position.x = 2;
 
 group.position.y = 1;
+group.scale.y = 2;
+group.rotation.y = 1;
 //there's almost no performance difference in using different methods
 // mesh.position.x = 0.7;
 // mesh.position.y = -0.6;
