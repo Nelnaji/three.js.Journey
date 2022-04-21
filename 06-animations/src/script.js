@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
+import gsap from "gsap"
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -9,7 +10,9 @@ const scene = new THREE.Scene()
 
 // Object
 const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+const material = new THREE.MeshBasicMaterial({
+    color: 0xff0000
+})
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
@@ -29,4 +32,24 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
-renderer.render(scene, camera)
+
+
+
+// Animations
+const clock = new THREE.Clock();
+
+
+
+const toc = () => {
+    const elapsedTime = clock.getElapsedTime();
+    mesh.rotation.y = Math.sin(elapsedTime);
+    mesh.rotation.x = Math.cos(elapsedTime);
+
+
+    // Renderer
+    renderer.render(scene, camera);
+
+    // appel la fonction toc encore une fois a la prochaine frame
+    window.requestAnimationFrame(toc);
+}
+toc();
